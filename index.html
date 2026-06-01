@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicroAlgal-LED - Algae-Powered Electricity for Rural Communities</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #0a1f1a;
+            background: #f8fbfa;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1.2rem 2rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(45, 122, 62, 0.1);
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e5a2f 0%, #2d7a3e 50%, #42b48c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #0a1f1a;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #2d7a3e, #42b48c);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -15%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(66, 180, 140, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(45, 122, 62, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite reverse;
+            will-change: transform;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-40px) scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 84px;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            line-height: 1.15;
+            color: #0a1f1a;
+            letter-spacing: -1.5px;
+        }
+
+        .hero .tagline {
+            font-size: 28px;
+            background: linear-gradient(135deg, #2d7a3e 0%, #42b48c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #4a4a4a;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e5a2f 0%, #2d7a3e 50%, #42b48c 100%);
+            color: white;
+            box-shadow: 0 12px 40px rgba(45, 122, 62, 0.35);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 50px rgba(45, 122, 62, 0.45);
+        }
+
+        .btn-secondary {
+            background: rgba(45, 122, 62, 0.08);
+            color: #2d7a3e;
+            border: 2px solid rgba(45, 122, 62, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(45, 122, 62, 0.15);
+            border-color: #2d7a3e;
+            transform: translateY(-4px);
+        }
+
+        /* Sections */
+        .section {
+            padding: 140px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: #0a1f1a;
+            letter-spacing: -1px;
+        }
+
+        .section-header p {
+            font-size: 20px;
+            color: #4a4a4a;
+            max-width: 650px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        /* Problem Cards */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            border-left: 5px solid transparent;
+            background-image: linear-gradient(white, white), linear-gradient(135deg, #2d7a3e, #42b48c);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(45, 122, 62, 0.15);
+        }
+
+        .problem-card h3 {
+            font-size: 22px;
+            margin-bottom: 1.2rem;
+            color: #0a1f1a;
+            font-weight: 700;
+        }
+
+        .problem-card p {
+            color: #4a4a4a;
+            line-height: 1.9;
+            font-weight: 300;
+            font-size: 16px;
+        }
+
+        /* Solution Section */
+        .solution-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            margin-top: 4rem;
+        }
+
+        .solution-text h3 {
+            font-size: 40px;
+            margin-bottom: 2rem;
+            color: #0a1f1a;
+            font-weight: 800;
+            letter-spacing: -0.7px;
+            line-height: 1.2;
+        }
+
+        .solution-text p {
+            font-size: 17px;
+            color: #4a4a4a;
+            margin-bottom: 1.8rem;
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        .solution-text strong {
+            color: #2d7a3e;
+            font-weight: 600;
+        }
+
+        .solution-visual {
+            background: linear-gradient(135deg, rgba(45, 122, 62, 0.08) 0%, rgba(66, 180, 140, 0.08) 100%);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 450px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(45, 122, 62, 0.1);
+        }
+
+        .system-flow {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .flow-step {
+            text-align: center;
+            flex: 0 0 auto;
+            animation: slideUp 1s ease-out;
+        }
+
+        .flow-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #2d7a3e 0%, #42b48c 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            margin: 0 auto 1.2rem;
+            box-shadow: 0 12px 30px rgba(45, 122, 62, 0.25);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .flow-step:hover .flow-icon {
+            transform: translateY(-8px) scale(1.1);
+        }
+
+        .flow-arrow {
+            font-size: 40px;
+            color: #2d7a3e;
+            font-weight: bold;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .flow-step p {
+            font-size: 15px;
+            color: #0a1f1a;
+            font-weight: 600;
+            margin-top: 0.8rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* Impact Section */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .impact-card {
+            background: linear-gradient(135deg, #1e5a2f 0%, #2d7a3e 50%, #42b48c 100%);
+            color: white;
+            padding: 3.5rem 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 12px 40px rgba(45, 122, 62, 0.25);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .impact-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(45, 122, 62, 0.35);
+        }
+
+        .impact-number {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .impact-label {
+            font-size: 17px;
+            font-weight: 500;
+            opacity: 0.98;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.3px;
+        }
+
+        /* Advantages */
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .advantage {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 2px solid rgba(45, 122, 62, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .advantage:hover {
+            border-color: #2d7a3e;
+            box-shadow: 0 12px 30px rgba(45, 122, 62, 0.12);
+            transform: translateY(-6px);
+        }
+
+        .advantage-icon {
+            font-size: 40px;
+            margin-bottom: 1rem;
+        }
+
+        .advantage p {
+            color: #0a1f1a;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 1.7;
+            letter-spacing: 0.3px;
+        }
+
+        /* How It Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+            counter-reset: step-counter;
+        }
+
+        .step {
+            background: white;
+            padding: 3rem 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            counter-increment: step-counter;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-top: 4px solid transparent;
+            border-image: linear-gradient(90deg, #2d7a3e, #42b48c) 1;
+        }
+
+        .step:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(45, 122, 62, 0.15);
+        }
+
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            top: -20px;
+            left: 2.5rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #2d7a3e, #42b48c);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 24px;
+            box-shadow: 0 8px 20px rgba(45, 122, 62, 0.3);
+            letter-spacing: -0.5px;
+        }
+
+        .step h3 {
+            font-size: 22px;
+            margin-bottom: 1.2rem;
+            color: #0a1f1a;
+            font-weight: 700;
+            margin-top: 1.5rem;
+        }
+
+        .step p {
+            color: #4a4a4a;
+            line-height: 1.9;
+            font-weight: 300;
+            font-size: 16px;
+        }
+
+        /* Cost Section */
+        .cost-container {
+            background: white;
+            padding: 4rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            margin-top: 3rem;
+            border: 2px solid rgba(45, 122, 62, 0.1);
+        }
+
+        .cost-highlight {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2.5rem;
+        }
+
+        .cost-box {
+            background: linear-gradient(135deg, rgba(45, 122, 62, 0.08) 0%, rgba(66, 180, 140, 0.08) 100%);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border-left: 5px solid #2d7a3e;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cost-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(66, 180, 140, 0.1), transparent);
+            border-radius: 50%;
+        }
+
+        .cost-box h4 {
+            color: #2d7a3e;
+            font-size: 16px;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+        }
+
+        .cost-box p {
+            color: #0a1f1a;
+            font-size: 44px;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -1px;
+        }
+
+        .cost-box .subtext {
+            color: #4a4a4a;
+            font-size: 15px;
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+        }
+
+        .cost-details {
+            margin-top: 3rem;
+            color: #4a4a4a;
+            line-height: 1.9;
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        .cost-details strong {
+            color: #0a1f1a;
+            font-weight: 600;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 3.5rem 2.5rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(45, 122, 62, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2d7a3e, #42b48c);
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 16px 40px rgba(45, 122, 62, 0.15);
+            border-color: #2d7a3e;
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #2d7a3e 0%, #42b48c 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 48px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(45, 122, 62, 0.25);
+        }
+
+        .team-member-name {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0a1f1a;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .team-member-role {
+            font-size: 16px;
+            color: #2d7a3e;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .team-member p {
+            font-size: 15px;
+            color: #4a4a4a;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0a1f1a 0%, #1e5a2f 100%);
+            color: white;
+            padding: 5rem 0 2rem;
+            margin-top: 8rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            color: #42b48c;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 15px;
+            margin-bottom: 0.8rem;
+            display: block;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #42b48c;
+            transform: translateX(4px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .solution-container {
+                grid-template-columns: 1fr;
+            }
+
+            .system-flow {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+
+            .cost-highlight {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 64px;
+            }
+
+            .section-header h2 {
+                font-size: 44px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1.2rem;
+                font-size: 13px;
+            }
+
+            .hero {
+                padding-top: 80px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero .tagline {
+                font-size: 22px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .section-header h2 {
+                font-size: 36px;
+            }
+
+            .solution-text h3 {
+                font-size: 28px;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .problem-card,
+            .step,
+            .team-member {
+                padding: 2rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">🌱 MicroAlgal-LED</div>
+            <ul>
+                <li><a href="#problem">Problem</a></li>
+                <li><a href="#solution">Solution</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#team">Team</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Algae-Powered Electricity<br>for Rural Communities</h1>
+            <p class="tagline">Solving floods. Creating energy. Transforming futures.</p>
+            <p>A revolutionary biogas system that converts microalgae into sustainable electricity while preventing floods and cleaning water. Climate-positive. Cost-effective. Scalable.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary">Explore Now</button>
+                <button class="btn btn-secondary">View Pitch Deck</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section" id="problem">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Global Challenge</h2>
+                <p>1.81 billion people live in high-risk flood areas. Rural communities face repeated power outages with no viable solutions.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>🌊 Devastating Floods</h3>
+                    <p>Monsoon seasons cause recurring water logging across rural regions. Families lose homes and livelihoods without mitigation infrastructure.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>⚡ Energy Poverty</h3>
+                    <p>Millions lack electricity access. In villages like Pandanwatand, residents walk 6 km just to charge phones off truck batteries.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>🔋 Grid Instability</h3>
+                    <p>Weak rural grids cannot support variable renewable inputs. No storage, no smart infrastructure—only rolling blackouts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="section" id="solution">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Elegant Solution</h2>
+                <p>A decentralized, nature-inspired system that transforms water into reliable clean energy.</p>
+            </div>
+            <div class="solution-container">
+                <div class="solution-text">
+                    <h3>How MicroAlgal-LED Works</h3>
+                    <p><strong>🚰 Harvest:</strong> Collect floodwater and wastewater into cultivator tanks—no waste, full potential.</p>
+                    <p><strong>🌿 Cultivate:</strong> Grow microalgae (Chlorella, Scenedesmus) in controlled conditions while absorbing CO₂ and purifying water.</p>
+                    <p><strong>💨 Convert:</strong> Feed harvested algae into anaerobic digesters to produce biogas (0.43–0.47 m³ CH₄/kg).</p>
+                    <p><strong>⚡ Generate:</strong> Power compact gensets supplying 24/7 electricity to homes, schools, and local industries.</p>
+                </div>
+                <div class="solution-visual">
+                    <div class="system-flow">
+                        <div class="flow-step">
+                            <div class="flow-icon">💧</div>
+                            <p>Wastewater</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="flow-icon">🌱</div>
+                            <p>Algae Growth</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="flow-icon">⚙️</div>
+                            <p>Biogas</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="flow-icon">⚡</div>
+                            <p>Electricity</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="section" id="impact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Transformative Impact</h2>
+                <p>Quantifiable benefits across social, environmental, and economic dimensions.</p>
+            </div>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-number">24/7</div>
+                    <div class="impact-label">Continuous Electricity</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number">₹3</div>
+                    <div class="impact-label">Per Unit Cost (vs ₹8 grid)</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number">≥91%</div>
+                    <div class="impact-label">Water Recovery Rate</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number">3–50kW</div>
+                    <div class="impact-label">Scalable Output Range</div>
+                </div>
+            </div>
+
+            <!-- Advantages -->
+            <div style="margin-top: 5rem; background: white; padding: 4rem; border-radius: 20px; border: 2px solid rgba(45, 122, 62, 0.1);">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 36px; text-align: center; margin-bottom: 3rem; color: #0a1f1a; letter-spacing: -0.7px;">Why We Win</h3>
+                <div class="advantages">
+                    <div class="advantage">
+                        <div class="advantage-icon">🌙</div>
+                        <p><strong>Works 24/7</strong><br>Unlike solar—operates day and night</p>
+                    </div>
+                    <div class="advantage">
+                        <div class="advantage-icon">📦</div>
+                        <p><strong>Modular Design</strong><br>Easy transport & rapid deployment</p>
+                    </div>
+                    <div class="advantage">
+                        <div class="advantage-icon">💰</div>
+                        <p><strong>Ultra Low Cost</strong><br>₹87K total system build</p>
+                    </div>
+                    <div class="advantage">
+                        <div class="advantage-icon">🔄</div>
+                        <p><strong>Weather Independent</strong><br>Reliable in any climate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>90-Day Path to Launch</h2>
+                <p>Our rapid prototyping timeline from site selection to full operational deployment.</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <h3>Site & Permits</h3>
+                    <p>Secure 5×5 m sunlit location. Get school principal approval. Consult local environmental boards for compliance.</p>
+                </div>
+                <div class="step">
+                    <h3>Procurement</h3>
+                    <p>Order bioreactor liners, barrels, and sensors. Collect starter algae cultures from local fisheries labs.</p>
+                </div>
+                <div class="step">
+                    <h3>Build & Setup</h3>
+                    <p>Install pond liner, fill with wastewater, adjust pH to 7.5, begin automated monitoring.</p>
+                </div>
+                <div class="step">
+                    <h3>First Harvest</h3>
+                    <p>Execute chitosan flocculation tests. Load digester with prepared slurry. Begin biogas production.</p>
+                </div>
+                <div class="step">
+                    <h3>Gas Quality Test</h3>
+                    <p>Install iron-sponge scrubber. Run generator on 30% biogas blend. Monitor methane quality & pressure.</p>
+                </div>
+                <div class="step">
+                    <h3>Data & Scale</h3>
+                    <p>Log all metrics (CH₄ %, H₂S, kWh output). Publish results. Prepare for site replication.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cost Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Affordable to Build. Profitable to Scale.</h2>
+            </div>
+            <div class="cost-container">
+                <div class="cost-highlight">
+                    <div class="cost-box">
+                        <h4>Total System Cost</h4>
+                        <p>₹87,000</p>
+                        <span class="subtext">~$1,048 USD | Includes installation & training</span>
+                    </div>
+                    <div class="cost-box">
+                        <h4>Electricity Cost per Unit</h4>
+                        <p>₹3</p>
+                        <span class="subtext">vs ₹8 standard grid rate | 62% savings</span>
+                    </div>
+                </div>
+                <div class="cost-details">
+                    <strong>What's Included:</strong> Bioreactor & structure (₹22K) • Algae cultures & nutrients (₹4.5K) • Anaerobic digester (₹12K) • Biogas generator (₹14K) • Battery storage & backup (₹5K) • Smart monitoring system (₹3K) • Piping & electrical (₹2K) • Installation & local training (₹2K) • Contingency & miscellaneous (₹22.5K).
+                    <br><br>
+                    <strong>Economic Model:</strong> Job creation through ongoing digester maintenance. Community ownership reduces long-term costs. Proven success with 3–50 kW gensets across Indian off-grid programs.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section" id="team">
+        <div class="container">
+            <div class="section-header">
+                <h2>Leadership Behind the Vision</h2>
+                <p>Two passionate innovators transforming global energy access.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-avatar">👩‍💼</div>
+                    <div class="team-member-name">Ananya Kumari</div>
+                    <div class="team-member-role">Founder</div>
+                    <p>Visionary founder driving MicroAlgal-LED's mission to democratize energy. Spearheading research, development, and impact scaling across rural communities.</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">👩‍🔬</div>
+                    <div class="team-member-name">Nivedita Bhasin</div>
+                    <div class="team-member-role">Co-Founder</div>
+                    <p>Published researcher in biotech and neurogenomics. Leading technical implementation, system optimization, and accelerator strategy. Committed to building sustainable solutions at scale.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section" style="text-align: center; padding: 100px 0;">
+        <div class="container">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 56px; margin-bottom: 1.5rem; color: #0a1f1a; letter-spacing: -1px; font-weight: 800;">Ready to Power Rural Communities?</h2>
+            <p style="font-size: 20px; color: #4a4a4a; margin-bottom: 2.5rem; max-width: 650px; margin-left: auto; margin-right: auto; font-weight: 300; line-height: 1.9;">
+                Join us in building a climate-positive, energy-positive future. MicroAlgal-LED is scaling across Asia, Africa, and beyond.
+            </p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary">Start Conversation</button>
+                <button class="btn btn-secondary">Download Resources</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About MicroAlgal-LED</h4>
+                    <p>A decentralized, climate-positive biogas system bringing 24/7 electricity to underserved communities. Founded by Ananya Kumari and Nivedita Bhasin.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#">Research Papers</a>
+                    <a href="#">Technical Documentation</a>
+                    <a href="#">Pitch Deck</a>
+                    <a href="#">Media Kit</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <a href="#">LinkedIn  https://www.linkedin.com/posts/microalgal-led_greenled-bioenergy-cleantech-activity-7357443145149636608-TWxT?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD1AGJsBS8fQK7l-vh1SYtVQu4l8OjnoGP4</a>
+                    <a href="#">GitHub niveditabhasin11-apex </a>
+                    <a href="#">niveditabhasin11@gmail.com</a>
+                    <a href="#">www.microalgal-led.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MicroAlgal-LED • Founded by Ananya Kumari & Nivedita Bhasin • Building climate-positive energy for billions</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
